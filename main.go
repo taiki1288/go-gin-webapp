@@ -90,10 +90,14 @@ func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*.html")
 
-	data := "Hello Go/Gin!!"
+	dbInit()
 
+	//index
     router.GET("/", func(ctx *gin.Context){
-        ctx.HTML(200, "index.html", gin.H{"data": data})
+		todos := dbGetAll()
+        ctx.HTML(200, "index.html", gin.H{
+			"todos": todos,
+		})
     })
 
     router.Run()
