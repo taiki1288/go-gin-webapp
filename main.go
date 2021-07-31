@@ -58,6 +58,20 @@ func dbGetOne(id int) Todo {
 	return todo
 }
 
+//DB更新
+func dbUpdate(id int, text string, status string) {
+	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	if err != nil {
+		panic("データベースが開けません(dbUpdate)")
+	}
+	var todo Todo 
+	db.First(&todo, id)
+	todo.Text = text 
+	todo.status = status 
+	db.Save(&todo)
+	db.Close()
+}
+
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*.html")
