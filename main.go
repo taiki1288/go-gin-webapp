@@ -1,8 +1,16 @@
 package main
 
 import (
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
+
 )
+
+type Todo struct {
+	gorm.Model
+	Text string
+	Status string
+}
 
 func main() {
     router := gin.Default()
