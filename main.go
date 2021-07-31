@@ -72,6 +72,18 @@ func dbUpdate(id int, text string, status string) {
 	db.Close()
 }
 
+//DB削除
+func dbDelete(id int) {
+	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	if err != nil {
+		panic("データベースが開けません(dbDelete)")
+	}
+	var todo Todo
+	db.First(&todo, id)
+	db.Delete(&todo)
+	db.Close()
+}
+
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*.html")
