@@ -67,7 +67,7 @@ func dbUpdate(id int, text string, status string) {
 	var todo Todo 
 	db.First(&todo, id)
 	todo.Text = text 
-	todo.status = status 
+	todo.Status = status 
 	db.Save(&todo)
 	db.Close()
 }
