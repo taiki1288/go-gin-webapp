@@ -107,5 +107,18 @@ func main() {
 		dbInsert(text, status)
 		ctx.Redirect(302, "/")
 	})
+
+	//Detail
+	router.GET("/detail/:id", func(ctx *ginContext){
+		n := ctx.Params("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		todo := dbGetOne(id)
+		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+	})
+
+	
     router.Run()
 }
