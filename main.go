@@ -100,5 +100,12 @@ func main() {
 		})
     })
 
+	//Create
+	router.POST("/new", func(ctx *ginContext){
+		text := ctx.PostForm("text")
+		status := ctx.PostForm("status")
+		dbInsert(text, status)
+		ctx.Redirect(302, "/")
+	})
     router.Run()
 }
