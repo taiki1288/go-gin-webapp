@@ -47,6 +47,17 @@ func dbGetAll() []Todo {
 	return todos
 }
 
+func dbGetOne(id int) Todo {
+	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	if err != nil {
+		panic("データベースが開けません(dbGetOne())")
+	}
+	var todo Todo
+	db.First(&todo, id)
+	db.Close()
+	return todo
+}
+
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*.html")
