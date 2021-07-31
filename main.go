@@ -24,6 +24,16 @@ func dbInit() {
 	defer db.Close()
 }
 
+func dbInsert(text string, status string) {
+	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	if err != nil {
+		panic("データベースが開けません(dbInsert)")
+	}
+
+	db.Create(&Todo{Text: text, Status: status})
+	defer db.Close()
+}
+
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*.html")
