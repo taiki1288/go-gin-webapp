@@ -101,7 +101,7 @@ func main() {
     })
 
 	//Create
-	router.POST("/new", func(ctx *ginContext){
+	router.POST("/new", func(ctx *gin.Context) {
 		text := ctx.PostForm("text")
 		status := ctx.PostForm("status")
 		dbInsert(text, status)
@@ -109,8 +109,8 @@ func main() {
 	})
 
 	//Detail
-	router.GET("/detail/:id", func(ctx *ginContext){
-		n := ctx.Params("id")
+	router.GET("/detail/:id", func(ctx *gin.Context) {
+		n := ctx.Param("id")
 		id, err := strconv.Atoi(n)
 		if err != nil {
 			panic(err)
